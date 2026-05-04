@@ -1,8 +1,8 @@
-import HelloClasse154 from "./components/HelloClasse154";
+import BlogArticoli from "./components/BlogArticoli.jsx";
 
 function App() {
   return (
-    <HelloClasse154 />
+    <BlogArticoli />
   );
 }
 export default App;
