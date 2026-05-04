@@ -48,15 +48,21 @@ function BlogArticoli() {
         setArticle(emptyArticle);
     }
 
+    const remuveById = (id) => {
+        const newArticlesList = articlesList.filter(user => user.id !== id);
+        setArticlesList(newArticlesList);
+    }
+
     return (
         <div className="container vh-100 justify-content-center">
-            <h1>Blog Articoli che raccontano la reale realtà</h1>
+            <h1 className="mb-5">Blog Articoli che raccontano la reale realtà</h1>
             <div className="row container-articoli justify-content-between">
                 {articlesList.map(article => {
                     const { id, title, content } = article;
                     return (
                         <div key={id} className="col-6 card">
                             <div className="card-body">
+                                <button onClick={() => remuveById(id)} className="btn delete-button">X</button>
                                 <h2 className="card-title">{title}</h2>
                                 <p className="card-text">{content}</p>
                             </div>
