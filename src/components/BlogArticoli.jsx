@@ -1,3 +1,6 @@
+import { useState } from "react";
+import FormAddArticle from "./FormAddArticle";
+
 const defaulArticles = [
     {
         id: 1,
@@ -6,7 +9,7 @@ const defaulArticles = [
     },
     {
         id: 2,
-        title: "cos'è Donald Trump",
+        title: "Cos'è Donald Trump",
         content: "in questo articolo scoprirete perchè in realtà Donald Trump in realtà è un IA che si è creata autonomamente partendo dalla base del comportamento dei più grandi conquistatori della terra conosciuta come Alessandro Magno, Adolf Hindler e Genghis Khan"
     },
 ]
@@ -18,10 +21,8 @@ function BlogArticoli() {
             <div className="row container-articoli justify-content-between">
                 {defaulArticles.map(article => {
                     const { id, title, content } = article;
-
                     return (
                         <div key={id} className="col-4 card">
-                            <img src="VUOTO" className="card-img-top" alt="VUOTO" />
                             <div className="card-body">
                                 <h2 className="card-title">{title}</h2>
                                 <p className="card-text">{content}</p>
@@ -30,19 +31,8 @@ function BlogArticoli() {
                     );
                 })}
             </div>
-            <hr className="my-5"/>
-            <div className="row justify-content-center">
-                <form className="col-10 m-2">
-                    <div className="mb-3">
-                        <label htmlFor="articleTitle" className="form-label">Titolo</label>
-                        <input type="text" className="form-control" id="articleTitle" placeholder="Titolo Articolo" />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="articleContent" className="form-label">Contenuto Articolo</label>
-                        <textarea className="form-control" id="articleContent" rows="5" placeholder="Scrivi il contenuto dell'articolo"></textarea>
-                    </div>
-                </form>
-            </div>
+            <hr className="my-5" />
+            <FormAddArticle />
         </div>
     );
 }
