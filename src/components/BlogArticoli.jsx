@@ -15,22 +15,33 @@ function BlogArticoli() {
     return (
         <div className="container vh-100 justify-content-center">
             <h1>Blog Articoli che raccontano la reale realtà</h1>
-            <div className="row container-articoli">
-                <div>
-                    {defaulArticles.map(article => {
-                        const { id, title, content } = article;
+            <div className="row container-articoli justify-content-between">
+                {defaulArticles.map(article => {
+                    const { id, title, content } = article;
 
-                        return (
-                            <div className="card">
-                                <img src="VUOTO" className="card-img-top" alt="VUOTO" />
-                                <div className="card-body">
-                                    <h2 className="card-title">{title}</h2>
-                                    <p className="card-text">{content}</p>
-                                </div>
+                    return (
+                        <div key={id} className="col-4 card">
+                            <img src="VUOTO" className="card-img-top" alt="VUOTO" />
+                            <div className="card-body">
+                                <h2 className="card-title">{title}</h2>
+                                <p className="card-text">{content}</p>
                             </div>
-                        )
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
+            </div>
+            <hr className="my-5"/>
+            <div className="row justify-content-center">
+                <form className="col-10 m-2">
+                    <div className="mb-3">
+                        <label htmlFor="articleTitle" className="form-label">Titolo</label>
+                        <input type="text" className="form-control" id="articleTitle" placeholder="Titolo Articolo" />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="articleContent" className="form-label">Contenuto Articolo</label>
+                        <textarea className="form-control" id="articleContent" rows="5" placeholder="Scrivi il contenuto dell'articolo"></textarea>
+                    </div>
+                </form>
             </div>
         </div>
     );
