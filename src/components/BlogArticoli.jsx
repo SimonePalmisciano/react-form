@@ -1,6 +1,11 @@
 import { useState } from "react";
 import FormAddArticle from "./FormAddArticle";
 
+const emptyArticle = {
+    title: '',
+    content: '',
+}
+
 const defaulArticles = [
     {
         id: 1,
@@ -15,14 +20,42 @@ const defaulArticles = [
 ]
 
 function BlogArticoli() {
+    const [articlesList, setArticlesList] = useState(defaulArticles);
+    const [article, setArticle] = useState(emptyArticle);
+
+    const changeInputsFormHandler = (event) => {
+        const target = event.target;
+        const targetValue = target.value;
+        const targetName = target.name;
+
+        const newArticle = {
+            ...article,
+            [targetName]: targetValue
+        };
+        setArticle(newArticle);
+    }
+
+    const submitHandler = (event) => {
+        event.preventDefault();
+
+        const articleToAdd = {
+            ...article,
+            id: crypto.randomUUID(),
+        };
+        const newArticlesList = [...articlesList, articleToAdd];
+        setArticlesList(newArticlesList);
+
+        setArticle(emptyArticle);
+    }
+
     return (
         <div className="container vh-100 justify-content-center">
             <h1>Blog Articoli che raccontano la reale realtà</h1>
             <div className="row container-articoli justify-content-between">
-                {defaulArticles.map(article => {
+                {articlesList.map(article => {
                     const { id, title, content } = article;
                     return (
-                        <div key={id} className="col-4 card">
+                        <div key={id} className="col-6 card">
                             <div className="card-body">
                                 <h2 className="card-title">{title}</h2>
                                 <p className="card-text">{content}</p>
@@ -32,7 +65,46 @@ function BlogArticoli() {
                 })}
             </div>
             <hr className="my-5" />
-            <FormAddArticle />
+            <div className="row justify-content-center">
+                <form onSubmit={submitHandler} className="col-10 m-2">
+                    <div className="mb-3">
+                        <label
+                            htmlFor="articleTitle"
+                            className="form-label">
+                            Titolo
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            onChange={changeInputsFormHandler}
+                            id="articleTitle"
+                            value={article.title}
+                            placeholder="Titolo Articolo"
+                            name='title'
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label
+                            htmlFor="articleContent"
+                            className="form-label">
+                            Contenuto Articolo
+                        </label>
+                        <textarea
+                            className="form-control"
+                            onChange={changeInputsFormHandler}
+                            id="articleContent"
+                            value={article.content}
+                            rows="5"
+                            name='content'
+                            placeholder="Scrivi il contenuto dell'articolo"></textarea>
+                    </div>
+                    <button
+                        type="submit"
+                        className="btn btn-primary">
+                        Aggiungi Articolo
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }
